@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import com.jakewharton.scalpel.ScalpelFrameLayout;
 
+/**
+ * Utility class allowing inject {@link ScalpelFrameLayout} to provided Activity at runtime.
+ */
 public final class ScalpelUtil {
   //region Public API
 
