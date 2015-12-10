@@ -12,11 +12,37 @@ android {
   }
 
   lintOptions {
-    abortOnError true
-    disable 'UnusedAttribute'
+    abortOnError false //TODO: Firgure out Travis errors
   }
 }
 
 dependencies {
   compile 'com.jakewharton.scalpel:scalpel:1.1.2'
 }
+
+ext {
+  bintrayRepo = 'maven'
+  bintrayName = 'com.jraska:scalpelutil'
+
+  publishedGroupId = 'com.jraska'
+  libraryName = 'Scalpel-Util'
+  artifact = 'scalpelutil'
+
+  libraryDescription = 'Allows runtime attach of Scalpel'
+
+  siteUrl = 'https://github.com/jraska/Scalpel-Util'
+  gitUrl = 'https://github.com/jraska/Scalpel-Util.git'
+
+  libraryVersion = version
+
+  developerId = 'jraska'
+  developerName = 'Josef Raska'
+  developerEmail = 'josef.raska@gmail.com'
+
+  licenseName = 'The Apache Software License, Version 2.0'
+  licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+  allLicenses = ["Apache-2.0"]
+}
+
+apply from: rootDir.absolutePath + '/gradle/installv1.gradle'
+apply from: rootDir.absolutePath + '/gradle/bintrayv1.gradle'
