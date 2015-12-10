@@ -18,7 +18,16 @@ android {
   }
 
   lintOptions {
-    abortOnError false //TODO: Firgure out Travis errors
+    abortOnError false //TODO: Figure out Travis errors
+  }
+
+  signingConfigs {
+    debug {
+      storeFile file("debug.keystore")
+      storePassword "scalpel-util-sample"
+      keyAlias "scalpel-util-sample"
+      keyPassword "scalpel-util-sample"
+    }
   }
 }
 
