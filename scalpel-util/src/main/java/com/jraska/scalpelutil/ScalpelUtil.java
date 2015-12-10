@@ -12,6 +12,15 @@ import com.jakewharton.scalpel.ScalpelFrameLayout;
 public final class ScalpelUtil {
   //region Public API
 
+  /**
+   * Wraps activity content with new {@link ScalpelFrameLayout instance}
+   * and turns on all of its features.
+   * <p/>
+   * You can unwrap the Activity with three fast clicks on screen.
+   *
+   * @param activity Activity to wrap content of.
+   * @return New created Scalpel frame layout wrapping the activity content.
+   */
   public static ScalpelFrameLayout wrapActivityWithScalpel(Activity activity) {
     if (activity == null) {
       throw new IllegalArgumentException("Parameter activity cannot be null");
