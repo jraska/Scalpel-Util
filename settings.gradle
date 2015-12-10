@@ -1,1 +1,1 @@
-include ':scalpel-util-sample'
+include ':scalpel-util-sample', ':scalpel-util'
