@@ -3,4 +3,5 @@
     <string name="icon">Icon</string>
     <string name="item">"Item %d"</string>
     <string name="item_description">"Description of item %d"</string>
+    <string name="tap_three_times">Tap three times on layout to dismiss Scalpel layout</string>
 </resources>

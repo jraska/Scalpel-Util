@@ -1,44 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    android:background="@android:drawable/list_selector_background"
-    android:id="@+id/item_container">
+    android:background="@android:drawable/list_selector_background">
 
-    <ImageView
-        android:id="@+id/item_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:padding="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:contentDescription="@string/icon"
-        android:src="@drawable/ic_launcher"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:drawable/list_selector_background"
+        android:id="@+id/item_container">
+
+        <ImageView
+            android:id="@+id/item_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:contentDescription="@string/icon"
+            android:src="@drawable/ic_launcher" />
 
 
-    <TextView
-        android:id="@+id/item_title"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/item_icon"
-        android:layout_toEndOf="@id/item_icon"
-        android:layout_height="wrap_content"
-        tools:text="@string/app_name"
-        android:textColor="#202020"
-        android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@id/item_icon"
+            android:layout_toEndOf="@id/item_icon"
+            android:layout_height="wrap_content"
+            tools:text="@string/app_name"
+            android:textColor="#202020"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/item_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/item_icon"
-        android:layout_toEndOf="@id/item_icon"
-        android:layout_below="@id/item_title"
-        tools:text="Description"
-        android:textColor="#767676"
-        android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/item_icon"
+            android:layout_toEndOf="@id/item_icon"
+            android:layout_below="@id/item_title"
+            tools:text="Description"
+            android:textColor="#767676"
+            android:textSize="14sp" />
 
-</RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

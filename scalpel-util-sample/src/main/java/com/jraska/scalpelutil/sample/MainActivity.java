@@ -2,6 +2,7 @@ package com.jraska.scalpelutil.sample;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
   //region Methods
 
   @OnClick(R.id.fab) void wrapWithScalpel() {
+    Toast.makeText(this, R.string.tap_three_times, Toast.LENGTH_SHORT).show();
+
     ScalpelUtil.wrapWithScalpel(this);
   }
 
@@ -82,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
       super(itemView);
 
       ButterKnife.bind(this, itemView);
+    }
+
+    @OnClick(R.id.item_container) void wrapItemWithScalpel(View v){
+      ScalpelUtil.wrapWithScalpel(v);
     }
   }
 
