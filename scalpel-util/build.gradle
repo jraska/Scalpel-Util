@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+version = rootProject.ext.version
+
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
@@ -12,7 +14,7 @@ android {
   }
 
   lintOptions {
-    abortOnError false //TODO: Firgure out Travis errors
+    abortOnError false //TODO: Figure out Travis errors
   }
 }
 
@@ -22,11 +24,11 @@ dependencies {
 
 ext {
   bintrayRepo = 'maven'
-  bintrayName = 'com.jraska:scalpelutil'
+  bintrayName = 'com.jraska:scalpel-util'
 
   publishedGroupId = 'com.jraska'
   libraryName = 'Scalpel-Util'
-  artifact = 'scalpelutil'
+  artifact = 'scalpel-util'
 
   libraryDescription = 'Allows runtime attach of Scalpel'
 
