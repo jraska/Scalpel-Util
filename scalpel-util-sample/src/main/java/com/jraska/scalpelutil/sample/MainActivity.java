@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
-      holder._titleText.setText("Item " + position);
-      holder._descriptionText.setText("Description of item " + position);
+      holder._titleText.setText("Item " + String.valueOf(position));
+      holder._descriptionText.setText("Description of item " + String.valueOf(position));
     }
 
     @Override

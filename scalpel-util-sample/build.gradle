@@ -18,7 +18,8 @@ android {
   }
 
   lintOptions {
-    abortOnError false //TODO: Figure out Travis errors
+    textReport true
+    textOutput 'stdout'
   }
 
   signingConfigs {
