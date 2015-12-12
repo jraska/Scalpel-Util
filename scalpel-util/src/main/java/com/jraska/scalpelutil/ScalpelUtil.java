@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import com.jakewharton.scalpel.ScalpelFrameLayout;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 /**
  * Utility class allowing inject {@link ScalpelFrameLayout} to provided Activity at runtime.
  */
@@ -29,22 +31,42 @@ public final class ScalpelUtil {
       throw new IllegalArgumentException("Parameter activity cannot be null");
     }
 
-    ScalpelFrameLayout scalpelFrameLayout = createScalpelFrameLayout(activity);
-
     View view = (View) activity.findViewById(android.R.id.content).getParent();
 
-    wrapView(view, scalpelFrameLayout);
+    return wrapWithScalpelInternal(view);
+  }
 
-    view.setLayoutParams(new ScalpelFrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+  /**
+   * Wraps activity content with new {@link ScalpelFrameLayout instance}
+   * and turns on all of its features.
+   * <p/>
+   * You can unwrap the Activity with three fast clicks on screen.
+   *
+   * @param view Activity to wrap content of.
+   * @return New created Scalpel frame layout wrapping the view content.
+   */
+  public static ScalpelFrameLayout wrapWithScalpel(View view) {
+    if (view == null) {
+      throw new IllegalArgumentException("Parameter 'view' cannot be null");
+    }
 
-    scalpelFrameLayout.setOnTouchListener(new UnwrapListener());
-
-    return scalpelFrameLayout;
+    return wrapWithScalpelInternal(view);
   }
 
   //endregion
 
   //region Methods
+
+  private static ScalpelFrameLayout wrapWithScalpelInternal(View view) {
+    ScalpelFrameLayout scalpelFrameLayout = createScalpelFrameLayout(view.getContext());
+    wrapView(view, scalpelFrameLayout);
+
+    view.setLayoutParams(new ScalpelFrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
+
+    scalpelFrameLayout.setOnTouchListener(new UnwrapListener());
+
+    return scalpelFrameLayout;
+  }
 
   private static ScalpelFrameLayout createScalpelFrameLayout(Context context) {
     if (context == null) {
@@ -52,7 +74,6 @@ public final class ScalpelUtil {
     }
 
     ScalpelFrameLayout scalpelFrameLayout = new ScalpelFrameLayout(context);
-    scalpelFrameLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     scalpelFrameLayout.setLayerInteractionEnabled(true);
     scalpelFrameLayout.setDrawViews(true);
     scalpelFrameLayout.setDrawIds(true);
@@ -66,10 +87,13 @@ public final class ScalpelUtil {
     if (parent != null && parent instanceof ViewGroup) {
       final ViewGroup parentViewGroup = (ViewGroup) parent;
 
+      // Wrapper should have same layout params as the previous view had
+      ViewGroup.LayoutParams previousLayoutParams = view.getLayoutParams();
+
       final int indexOfChild = parentViewGroup.indexOfChild(view);
       parentViewGroup.removeView(view);
 
-      parentViewGroup.addView(wrapper, indexOfChild);
+      parentViewGroup.addView(wrapper, indexOfChild, previousLayoutParams);
     }
 
     wrapper.addView(view);
@@ -79,11 +103,19 @@ public final class ScalpelUtil {
     final int childCount = wrapper.getChildCount();
     View[] childViews = new View[childCount];
 
+
     ViewGroup parent = (ViewGroup) wrapper.getParent();
     parent.removeView(wrapper);
 
     for (int i = 0; i < childCount; i++) {
       childViews[i] = wrapper.getChildAt(i);
+    }
+
+    // If there was just one wrapper reuse the wrapper layout
+    // params to ensure correct type for parent
+    if (childCount == 1) {
+      ViewGroup.LayoutParams wrapperParams = wrapper.getLayoutParams();
+      childViews[0].setLayoutParams(wrapperParams);
     }
 
     for (int i = 0; i < childCount; i++) {
@@ -101,16 +133,23 @@ public final class ScalpelUtil {
   private static class UnwrapListener implements View.OnTouchListener {
     private static final long THREE_CLICKS_THRESHOLD = 500;
 
-    private long _down1;
-    private long _down2;
+    // Both values are initialized with very past values for test purposes
+    // and also to avoid potential error on zero uptime millis :D
+    private long _firstDown = Long.MIN_VALUE;
+    private long _secondDown = Long.MIN_VALUE;
 
     private long getNextDiff() {
       long currentMillis = SystemClock.elapsedRealtime();
 
-      long diff = (currentMillis - _down2) + (_down2 - _down1);
+      long diff = (currentMillis - _firstDown);
 
-      _down1 = _down2;
-      _down2 = currentMillis;
+      _firstDown = _secondDown;
+      _secondDown = currentMillis;
+
+      // Avoids start negative values errors
+      if (diff < 0) {
+        return -diff;
+      }
 
       return diff;
     }
