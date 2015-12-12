@@ -12,10 +12,6 @@ android {
     versionName version
     versionCode rootProject.ext.versionCode
   }
-
-  lintOptions {
-    abortOnError false //TODO: Figure out Travis errors
-  }
 }
 
 dependencies {

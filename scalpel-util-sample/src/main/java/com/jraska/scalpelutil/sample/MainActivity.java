@@ -1,5 +1,6 @@
 package com.jraska.scalpelutil.sample;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,8 +62,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
-      holder._titleText.setText("Item " + String.valueOf(position));
-      holder._descriptionText.setText("Description of item " + String.valueOf(position));
+      Context context = holder.itemView.getContext();
+
+      holder._titleText.setText(context.getString(R.string.item, position));
+      holder._descriptionText.setText(context.getString(R.string.item_description, position));
     }
 
     @Override
