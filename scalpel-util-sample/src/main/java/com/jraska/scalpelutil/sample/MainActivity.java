@@ -1,29 +1,38 @@
 package com.jraska.scalpelutil.sample;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.jraska.scalpelutil.ScalpelUtil;
 
 public class MainActivity extends AppCompatActivity {
+  //region Fields
+
+  @Bind(R.id.toolbar) Toolbar _toolbar;
+
+  //endregion
+
   //region Activity overrides
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
 
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        ScalpelUtil.wrapWithScalpel(MainActivity.this);
-      }
-    });
+    setContentView(R.layout.activity_main);
+    ButterKnife.bind(this);
+
+    setSupportActionBar(_toolbar);
+  }
+
+  //endregion
+
+  //region Methods
+
+  @OnClick(R.id.fab) void wrapWithScalpel() {
+    ScalpelUtil.wrapWithScalpel(this);
   }
 
   //endregion
