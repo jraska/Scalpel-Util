@@ -3,14 +3,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:background="@android:drawable/list_selector_background">
+    android:layout_height="72dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:background="@android:drawable/list_selector_background"
         android:id="@+id/item_container">
 
