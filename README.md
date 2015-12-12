@@ -12,6 +12,8 @@ Utility class for great [Scalpel][Scalpel] library allowing attach scalpel at ru
 ```java
 // Dynamically add scalpel layout to your activity
 ScalpelFrameLayout scalpel = ScalpelUtil.wrapWithScalpel(activity);
+// Wrap any view with scalpel
+ScalpelFrameLayout scalpel = ScalpelUtil.wrapWithScalpel(view);
 ```
 
 Then you can remove it by three fast clicks on layout.
@@ -20,7 +22,7 @@ Then you can remove it by three fast clicks on layout.
 
 Grab via Gradle: 
 ```groovy
-compile 'com.jraska:scalpel-util:1.1.0'
+compile 'com.jraska:scalpel-util:1.1.1'
 ```
 
 ## License
