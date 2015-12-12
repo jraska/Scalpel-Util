@@ -25,9 +25,7 @@ import org.robolectric.annotation.Config;
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.obtain;
 import static org.assertj.android.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(RobolectricGradleTestRunner.class)
@@ -130,6 +128,16 @@ public class ScalpelUtilTest {
 
     View nextViewFromActivity = activity.findViewById(id);
     Assert.assertThat(nextViewFromActivity, is(CoreMatchers.<View>nullValue()));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testIllegalArgumentOnNullActivity() throws Exception {
+    ScalpelUtil.wrapWithScalpel((Activity) null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testIllegalArgumentOnNullView() throws Exception {
+    ScalpelUtil.wrapWithScalpel((View) null);
   }
 
   //endregion
