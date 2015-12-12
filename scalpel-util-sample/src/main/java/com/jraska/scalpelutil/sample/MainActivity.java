@@ -2,7 +2,13 @@ package com.jraska.scalpelutil.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -12,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
   //region Fields
 
   @Bind(R.id.toolbar) Toolbar _toolbar;
+  @Bind(R.id.recycler) RecyclerView _recyclerView;
 
   //endregion
 
@@ -25,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     ButterKnife.bind(this);
 
     setSupportActionBar(_toolbar);
+
+    _recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    _recyclerView.setAdapter(new SampleAdapter());
   }
 
   //endregion
@@ -33,6 +43,43 @@ public class MainActivity extends AppCompatActivity {
 
   @OnClick(R.id.fab) void wrapWithScalpel() {
     ScalpelUtil.wrapWithScalpel(this);
+  }
+
+  //endregion
+
+  //region Nested classes
+
+  static class SampleAdapter extends RecyclerView.Adapter<MainActivity.ItemHolder> {
+    @Override
+    public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+      View inflated = inflater.inflate(R.layout.item_main, parent, false);
+
+      ItemHolder itemHolder = new ItemHolder(inflated);
+      return itemHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(ItemHolder holder, int position) {
+      holder._titleText.setText("Item " + position);
+      holder._descriptionText.setText("Description of item " + position);
+    }
+
+    @Override
+    public int getItemCount() {
+      return 10;
+    }
+  }
+
+  static class ItemHolder extends RecyclerView.ViewHolder {
+    @Bind(R.id.item_title) TextView _titleText;
+    @Bind(R.id.item_description) TextView _descriptionText;
+
+    public ItemHolder(View itemView) {
+      super(itemView);
+
+      ButterKnife.bind(this, itemView);
+    }
   }
 
   //endregion
