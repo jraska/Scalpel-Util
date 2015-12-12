@@ -24,7 +24,7 @@ public final class ScalpelUtil {
    * @param activity Activity to wrap content of.
    * @return New created Scalpel frame layout wrapping the activity content.
    */
-  public static ScalpelFrameLayout wrapActivityWithScalpel(Activity activity) {
+  public static ScalpelFrameLayout wrapWithScalpel(Activity activity) {
     if (activity == null) {
       throw new IllegalArgumentException("Parameter activity cannot be null");
     }
@@ -101,16 +101,16 @@ public final class ScalpelUtil {
   private static class UnwrapListener implements View.OnTouchListener {
     private static final long THREE_CLICKS_THRESHOLD = 500;
 
-    private long m_down1;
-    private long m_down2;
+    private long _down1;
+    private long _down2;
 
     private long getNextDiff() {
       long currentMillis = SystemClock.elapsedRealtime();
 
-      long diff = (currentMillis - m_down2) + (m_down2 - m_down1);
+      long diff = (currentMillis - _down2) + (_down2 - _down1);
 
-      m_down1 = m_down2;
-      m_down2 = currentMillis;
+      _down1 = _down2;
+      _down2 = currentMillis;
 
       return diff;
     }
