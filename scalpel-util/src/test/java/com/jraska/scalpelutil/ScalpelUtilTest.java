@@ -140,6 +140,26 @@ public class ScalpelUtilTest {
     ScalpelUtil.wrapWithScalpel((View) null);
   }
 
+  @Test
+  public void testWrapViewOnNullParent() throws Exception {
+    TextView textView = new TextView(getContext());
+
+    ScalpelFrameLayout scalpel = ScalpelUtil.wrapWithScalpel(textView);
+
+    assertThat(textView).hasParent(scalpel);
+  }
+
+  @Test
+  public void testUnwrapViewOnNullParent() throws Exception {
+    TextView textView = new TextView(getContext());
+
+    ScalpelFrameLayout scalpel = ScalpelUtil.wrapWithScalpel(textView);
+
+    dispatchThreeDowns(scalpel);
+
+    assertThat(textView).hasParent(null);
+  }
+
   //endregion
 
   //region Methods

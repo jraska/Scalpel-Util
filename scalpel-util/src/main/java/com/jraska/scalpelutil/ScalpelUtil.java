@@ -37,12 +37,12 @@ public final class ScalpelUtil {
   }
 
   /**
-   * Wraps activity content with new {@link ScalpelFrameLayout instance}
+   * Wraps view content with new {@link ScalpelFrameLayout instance}
    * and turns on all of its features.
    * <p/>
    * You can unwrap the Activity with three fast clicks on screen.
    *
-   * @param view Activity to wrap content of.
+   * @param view View to wrap content of.
    * @return New created Scalpel frame layout wrapping the view content.
    */
   public static ScalpelFrameLayout wrapWithScalpel(View view) {
@@ -105,7 +105,10 @@ public final class ScalpelUtil {
 
 
     ViewGroup parent = (ViewGroup) wrapper.getParent();
-    parent.removeView(wrapper);
+
+    if (parent != null) {
+      parent.removeView(wrapper);
+    }
 
     for (int i = 0; i < childCount; i++) {
       childViews[i] = wrapper.getChildAt(i);
@@ -115,14 +118,18 @@ public final class ScalpelUtil {
     // params to ensure correct type for parent
     if (childCount == 1) {
       ViewGroup.LayoutParams wrapperParams = wrapper.getLayoutParams();
-      childViews[0].setLayoutParams(wrapperParams);
+      if (wrapperParams != null) {
+        childViews[0].setLayoutParams(wrapperParams);
+      }
     }
 
     for (int i = 0; i < childCount; i++) {
       final View childView = childViews[i];
 
       wrapper.removeView(childView);
-      parent.addView(childView);
+      if (parent != null) {
+        parent.addView(childView);
+      }
     }
   }
 
