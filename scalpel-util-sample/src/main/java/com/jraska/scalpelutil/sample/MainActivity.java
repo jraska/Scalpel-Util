@@ -15,6 +15,7 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.jakewharton.scalpel.ScalpelFrameLayout;
 import com.jraska.scalpelutil.ScalpelUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -88,8 +89,10 @@ public class MainActivity extends AppCompatActivity {
       ButterKnife.bind(this, itemView);
     }
 
-    @OnClick(R.id.item_container) void wrapItemWithScalpel(View v){
-      ScalpelUtil.wrapWithScalpel(v);
+    @OnClick(R.id.item_container) void wrapItemWithScalpel(View view){
+      ScalpelFrameLayout scalpel = ScalpelUtil.wrapWithScalpel(view);
+
+      scalpel.setId(R.id.scalpel_layout);
     }
   }
 
