@@ -1,3 +1,5 @@
+DEPRECATED! Android Studio 4.0's layout inspector now includes a live-updating 3D view. Use it!
+
 # Scalpel-Util
 Utility class for great [Scalpel][Scalpel] library allowing attach scalpel at runtime
 
